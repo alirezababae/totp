@@ -13,14 +13,29 @@ app.post("/secret",(req,res,next)=>{
     res.send({"secret":secret.base32})
 })
 
-app.post("/genrett",(req,res,next)=>{
+app.post("/generate",(req,res,next)=>{
    
     res.send({
         "token":speakeasy.totp({
             secret:req.body.secret,
             encoding:"base32"
+        }),
+        "remaining":(30-Math.floor((new Date().getTime()/1000.0 % 30)))
+    })
+})
+
+
+app.post("/validate",(req,res,next)=>{
+
+    res.send({
+        "valid":speakeasy.totp.verify({
+            secret:req.body.secret,
+            encoding:"base32",
+            token:req.body.token,
+            window:0
         })
     })
+
 })
 
 app.listen(3000,()=>{
