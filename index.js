@@ -9,7 +9,7 @@ app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({extended:true}))
 
 app.post("/secret",(req,res,next)=>{
-    let secret = speakeasy.generateSecret({length:20})
+    var secret = speakeasy.generateSecret({length:20})
     res.send({"secret":secret.base32})
 })
 
@@ -20,7 +20,7 @@ app.post("/generate",(req,res,next)=>{
             secret:req.body.secret,
             encoding:"base32"
         }),
-        "remaining":(50-Math.floor((new Date().getTime()/1000.0 % 50)))
+        "remaining":(60-Math.floor((new Date().getTime()/1000.0 % 60)))
     })
 })
 
