@@ -20,7 +20,7 @@ app.post("/generate",(req,res,next)=>{
             secret:req.body.secret,
             encoding:"base32"
         }),
-        "remaining":(30-Math.floor((new Date().getTime()/1000.0 % 30)))
+        "remaining":(50-Math.floor((new Date().getTime()/1000.0 % 50)))
     })
 })
 
